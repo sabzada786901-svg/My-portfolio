@@ -1,0 +1,178 @@
+import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { PROJECTS } from '../data/portfolioData';
+import type { Project } from '../types';
+import { ProjectDetailModal } from './modals/ProjectDetailModal';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Sparkles,
+  ArrowRight,
+  Bot,
+  Terminal,
+  Zap,
+  Globe,
+  Cpu,
+} from 'lucide-react';
+
+export const Projects: React.FC = () => {
+  const { t, language, isRTL } = useLanguage();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'ai-agents' | 'web-dev'>('all');
+
+  const filteredProjects =
+    activeFilter === 'all'
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === activeFilter);
+
+  const getProjectIcon = (id: string) => {
+    switch (id) {
+      case 'agenticaim':
+        return Cpu;
+      case 'aura-ai':
+        return Bot;
+      case 'webintel-ai':
+        return Globe;
+      case 'friendly-ai':
+        return Sparkles;
+      case 'kisan-dost-ai':
+        return Zap;
+      default:
+        return Terminal;
+    }
+  };
+
+  return (
+    <section id="projects" className="relative py-24 bg-theme-primary transition-colors duration-300 overflow-hidden">
+      {/* Background Subtle Gradient (Dark mode only) */}
+      <div className="hidden dark:block absolute top-1/4 left-10 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
+            <Sparkles className="w-4 h-4" />
+            <span>{t.projects.badge}</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-theme-main tracking-tight mb-4">
+            {t.projects.heading}
+          </h2>
+          <p className="text-[15px] sm:text-[16px] text-theme-secondary leading-relaxed">
+            {t.projects.subheading}
+          </p>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
+          <button
+            onClick={() => setActiveFilter('all')}
+            className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
+              activeFilter === 'all'
+                ? 'bg-theme-accent text-white card-shadow'
+                : 'bg-theme-card text-theme-secondary hover:text-theme-main border border-theme card-shadow'
+            }`}
+          >
+            {t.projects.filterAll}
+          </button>
+          <button
+            onClick={() => setActiveFilter('ai-agents')}
+            className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
+              activeFilter === 'ai-agents'
+                ? 'bg-theme-accent text-white card-shadow'
+                : 'bg-theme-card text-theme-secondary hover:text-theme-main border border-theme card-shadow'
+            }`}
+          >
+            {language === 'ur' ? 'اے آئی ایجنٹس اور سسٹمز' : 'AI Agents & Systems'}
+          </button>
+          <button
+            onClick={() => setActiveFilter('web-dev')}
+            className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
+              activeFilter === 'web-dev'
+                ? 'bg-theme-accent text-white card-shadow'
+                : 'bg-theme-card text-theme-secondary hover:text-theme-main border border-theme card-shadow'
+            }`}
+          >
+            {language === 'ur' ? 'ویب ڈویلپمنٹ' : 'Web Engineering'}
+          </button>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, idx) => {
+              const Icon = getProjectIcon(project.id);
+              return (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className="rounded-2xl bg-theme-card border border-theme overflow-hidden flex flex-col justify-between hover:border-theme-accent transition-all duration-200 card-shadow group"
+                >
+                  {/* Visual Top Preview Frame */}
+                  <div className="p-6 bg-theme-card-subtle border-b border-theme relative overflow-hidden">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-11 h-11 rounded-xl bg-theme-card border border-theme flex items-center justify-center group-hover:border-theme-accent transition-colors card-shadow">
+                        <Icon className="w-5 h-5 text-theme-accent" />
+                      </div>
+
+                      <span className="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded bg-theme-card border border-theme text-theme-accent">
+                        {language === 'ur' ? project.statusUr : project.status}
+                      </span>
+                    </div>
+
+                    <h3 className="text-[19px] sm:text-[20px] font-bold text-theme-main mb-1 group-hover:text-theme-accent transition-colors">
+                      {language === 'ur' ? project.titleUr : project.title}
+                    </h3>
+                    <p className="text-[13px] text-theme-secondary line-clamp-1 font-medium">
+                      {language === 'ur' ? project.taglineUr : project.tagline}
+                    </p>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <p className="text-[14px] text-theme-secondary leading-relaxed mb-6 line-clamp-3">
+                      {language === 'ur' ? project.descriptionUr : project.description}
+                    </p>
+
+                    <div>
+                      {/* Tech stack badges */}
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {project.techStack.slice(0, 4).map((tech, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="px-2.5 py-1 rounded-md bg-theme-card-subtle border border-theme text-[12px] font-medium text-theme-secondary"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* View Details Action */}
+                      <button
+                        onClick={() => setSelectedProject(project)}
+                        className="w-full py-2.5 px-4 rounded-xl text-[13.5px] font-semibold text-theme-main bg-theme-card-subtle border border-theme hover:border-theme-accent hover:text-theme-accent transition-all flex items-center justify-center gap-2 cursor-pointer group/btn card-shadow"
+                      >
+                        <span>{t.projects.viewDetails}</span>
+                        <ArrowRight className={`w-4 h-4 text-theme-accent transition-transform duration-200 ${isRTL ? 'group-hover/btn:-translate-x-1' : 'group-hover/btn:translate-x-1'}`} />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+      </div>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+    </section>
+  );
+};
