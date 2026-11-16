@@ -79,7 +79,13 @@ export const Contact: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
             <Sparkles className="w-4 h-4" />
             <span>{t.contact.badge}</span>
@@ -90,10 +96,16 @@ export const Contact: React.FC = () => {
           <p className="text-[15px] sm:text-[16px] text-theme-secondary leading-relaxed">
             {t.contact.subheading}
           </p>
-        </div>
+        </motion.div>
 
         {/* Contact Form Card */}
-        <div className="rounded-3xl bg-theme-card border border-theme p-6 sm:p-10 card-shadow relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="rounded-3xl bg-theme-card border border-theme p-6 sm:p-10 card-shadow relative overflow-hidden"
+        >
           
           {/* Privacy Banner */}
           <div className="flex items-center gap-3 p-3.5 mb-8 rounded-xl bg-theme-card-subtle border border-theme text-[13.5px] text-theme-secondary card-shadow">
@@ -286,7 +298,7 @@ export const Contact: React.FC = () => {
             </form>
           )}
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -11,37 +11,25 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    try {
-      const saved = localStorage.getItem('gm_v2_theme');
-      if (saved === 'light' || saved === 'dark') return saved;
-      return 'dark'; // Default to dark futuristic theme inspired by reference image
-    } catch {
-      return 'dark';
-    }
-  });
+  const [theme, setThemeState] = useState<Theme>('dark');
 
   useEffect(() => {
     try {
-      localStorage.setItem('gm_v2_theme', theme);
+      localStorage.removeItem('gm_theme');
+      localStorage.removeItem('gm_v2_theme');
     } catch {
       // storage unavailable
     }
 
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light-mode');
-      root.classList.remove('dark-mode');
-      root.setAttribute('data-theme', 'light');
-    } else {
-      root.classList.add('dark-mode');
-      root.classList.remove('light-mode');
-      root.setAttribute('data-theme', 'dark');
-    }
-  }, [theme]);
+    root.classList.add('dark-mode');
+    root.classList.remove('light-mode');
+    root.setAttribute('data-theme', 'dark');
+  }, []);
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    // Locked to dark theme as requested
+    setThemeState('dark');
   };
 
   const setTheme = (t: Theme) => {

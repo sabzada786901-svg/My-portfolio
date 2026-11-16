@@ -36,7 +36,13 @@ export const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
             <Sparkles className="w-4 h-4" />
             <span>{t.services.badge}</span>
@@ -47,7 +53,7 @@ export const Services: React.FC = () => {
           <p className="text-[15px] sm:text-[16px] text-theme-secondary leading-relaxed">
             {t.services.subheading}
           </p>
-        </div>
+        </motion.div>
 
         {/* 6 Premium Service Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
@@ -56,11 +62,12 @@ export const Services: React.FC = () => {
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                className="group relative rounded-2xl bg-theme-card border border-theme p-7 card-shadow flex flex-col justify-between hover:border-theme-accent transition-all duration-200"
+                viewport={{ once: true, amount: 0.15 }}
+                whileHover={{ y: -5, transition: { duration: 0.25 } }}
+                transition={{ duration: 0.55, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative rounded-2xl bg-theme-card border border-theme p-7 card-shadow flex flex-col justify-between hover:border-theme-accent transition-colors duration-200"
               >
                 <div>
                   {/* Service Icon */}

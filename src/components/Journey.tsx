@@ -33,7 +33,13 @@ export const Journey: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
             <Milestone className="w-4 h-4" />
             <span>{t.journey.badge}</span>
@@ -44,7 +50,7 @@ export const Journey: React.FC = () => {
           <p className="text-[15px] sm:text-[16px] text-theme-secondary leading-relaxed">
             {t.journey.subheading}
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Container */}
         <div className="relative">
@@ -63,10 +69,10 @@ export const Journey: React.FC = () => {
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: index * 0.07 }}
+                  initial={{ opacity: 0, y: 26, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   className={`relative flex flex-col sm:flex-row items-start ${
                     isEven ? 'sm:flex-row-reverse' : ''
                   } gap-6 sm:gap-10`}
@@ -86,7 +92,10 @@ export const Journey: React.FC = () => {
                       isRTL ? 'pr-12 sm:pr-0' : 'pl-12 sm:pl-0'
                     }`}
                   >
-                    <div className="rounded-2xl bg-theme-card border border-theme p-6 card-shadow hover:border-theme-accent transition-all duration-200 group">
+                    <motion.div
+                      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                      className="rounded-2xl bg-theme-card border border-theme p-6 card-shadow hover:border-theme-accent transition-colors duration-200 group"
+                    >
                       
                       {/* Card Header */}
                       <div className="flex items-center justify-between mb-3">
@@ -125,7 +134,7 @@ export const Journey: React.FC = () => {
                         </div>
                       </div>
 
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Empty side for layout symmetry */}

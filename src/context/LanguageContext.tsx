@@ -13,41 +13,29 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    try {
-      const saved = localStorage.getItem('gm_portfolio_lang');
-      return saved === 'ur' ? 'ur' : 'en';
-    } catch {
-      return 'en';
-    }
-  });
+  const [language, setLanguageState] = useState<Language>('en');
 
   useEffect(() => {
     try {
-      localStorage.setItem('gm_portfolio_lang', language);
+      localStorage.removeItem('gm_portfolio_lang');
     } catch {
       // storage unavailable
     }
-    const isRtl = language === 'ur';
-    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-    document.documentElement.lang = language;
-    if (isRtl) {
-      document.documentElement.classList.add('urdu-mode');
-    } else {
-      document.documentElement.classList.remove('urdu-mode');
-    }
-  }, [language]);
+    document.documentElement.dir = 'ltr';
+    document.documentElement.lang = 'en';
+    document.documentElement.classList.remove('urdu-mode');
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
   };
 
   const toggleLanguage = () => {
-    setLanguageState((prev) => (prev === 'en' ? 'ur' : 'en'));
+    setLanguageState('en');
   };
 
-  const isRTL = language === 'ur';
-  const t = translations[language];
+  const isRTL = false;
+  const t = translations.en;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t, isRTL }}>

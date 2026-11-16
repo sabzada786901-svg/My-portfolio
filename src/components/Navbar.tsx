@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { useTheme } from '../context/ThemeContext';
-import { Menu, X, ArrowUpRight, Sparkles, Globe, Sun, Moon } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { t, language, toggleLanguage, isRTL } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
+  const { t, isRTL } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -71,18 +69,18 @@ export const Navbar: React.FC = () => {
           >
             <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-theme-card border border-theme flex items-center justify-center p-2 overflow-hidden transition-all duration-200 group-hover:border-theme-accent card-shadow">
               <img
-                src={theme === 'dark' ? '/assets/logo-blue.png' : '/assets/logo-icon.png'}
-                alt="Brand Logo"
+                src="/assets/logo-blue.png"
+                alt="Gull Muhammad Logo"
                 className="w-full h-full object-contain filter transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-[21px] sm:text-[22px] tracking-tight text-theme-main group-hover:text-theme-accent transition-colors flex items-center gap-2 leading-tight">
-                {language === 'ur' ? 'گل محمد' : 'Gull Muhammad'}
+                Gull Muhammad
                 <span className="inline-block w-2 h-2 rounded-full bg-theme-accent"></span>
               </span>
               <span className="text-[13px] sm:text-[13.5px] text-theme-secondary font-medium tracking-normal leading-tight">
-                {language === 'ur' ? 'اے آئی ایجنٹ انجینئر' : 'AI Agent Engineer & Web Developer'}
+                AI Agent Engineer & Web Developer
               </span>
             </div>
           </button>
@@ -107,70 +105,22 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action Items: Theme Toggle, Language Switcher (14-15px), Hire Me (15-16px) */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            {/* Theme Toggle (Dark / Light) */}
-            <button
-              onClick={toggleTheme}
-              className="p-2.5 rounded-full bg-theme-card border border-theme text-theme-main hover:border-theme-accent transition-all cursor-pointer card-shadow"
-              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              aria-label="Toggle theme mode"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-[#F59E0B] transition-transform duration-300 hover:rotate-45" />
-              ) : (
-                <Moon className="w-4 h-4 text-theme-accent transition-transform duration-300 hover:-rotate-12" />
-              )}
-            </button>
-
-            {/* Language Switcher (14-15px typography, enhanced visibility) */}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-theme-card border border-theme text-[14px] sm:text-[14.5px] font-medium text-theme-main hover:border-theme-accent transition-all cursor-pointer card-shadow"
-              title={language === 'en' ? 'اردو میں تبدیل کریں' : 'Switch to English'}
-            >
-              <Globe className="w-4 h-4 text-theme-accent" />
-              <span>{t.nav.languageToggle}</span>
-            </button>
-
-            {/* Hire Me CTA Button with Enhanced Hover Effects */}
+          {/* Right Action: Hire Me CTA Button (Theme & Language Switchers Removed) */}
+          <div className="hidden sm:flex items-center">
             <button
               onClick={() => scrollTo('contact')}
-              className="relative inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[15px] sm:text-[15.5px] font-semibold text-white bg-theme-accent hover:opacity-95 hover:shadow-[0_0_20px_rgba(0,217,245,0.5)] hover:-translate-y-0.5 hover:scale-[1.03] active:translate-y-0 active:scale-[0.98] transition-all duration-300 card-shadow cursor-pointer group"
+              className="relative inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-[15px] sm:text-[15.5px] font-semibold text-white bg-theme-accent hover:opacity-95 hover:shadow-[0_0_20px_rgba(0,217,245,0.5)] hover:-translate-y-0.5 hover:scale-[1.03] active:translate-y-0 active:scale-[0.98] transition-all duration-300 card-shadow cursor-pointer group"
             >
               <span>{t.nav.hireMe}</span>
               <ArrowUpRight className={`w-4 h-4 transition-transform duration-200 ${isRTL ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'} group-hover:-translate-y-0.5`} />
             </button>
           </div>
 
-          {/* Mobile Menu Actions */}
-          <div className="flex sm:hidden items-center gap-2">
-            {/* Mobile Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-theme-card border border-theme text-theme-main"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-[#F59E0B]" />
-              ) : (
-                <Moon className="w-4 h-4 text-theme-accent" />
-              )}
-            </button>
-
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-theme-card border border-theme text-[13.5px] font-medium text-theme-main"
-            >
-              <Globe className="w-3.5 h-3.5 text-theme-accent" />
-              <span>{t.nav.languageToggle}</span>
-            </button>
-
-            {/* Hamburger Button */}
+          {/* Mobile Hamburger Button */}
+          <div className="flex sm:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-theme-card border border-theme text-theme-secondary hover:text-theme-main"
+              className="p-2.5 rounded-xl bg-theme-card border border-theme text-theme-secondary hover:text-theme-main transition-colors cursor-pointer"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

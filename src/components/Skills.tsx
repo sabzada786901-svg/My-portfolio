@@ -54,7 +54,13 @@ export const Skills: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
             <Sparkles className="w-4 h-4" />
             <span>{t.skills.badge}</span>
@@ -65,10 +71,16 @@ export const Skills: React.FC = () => {
           <p className="text-[15px] sm:text-[16px] text-theme-secondary leading-relaxed">
             {t.skills.subheading}
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap items-center justify-center gap-2 mb-14"
+        >
           <button
             onClick={() => setActiveCategory('all')}
             className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
@@ -98,7 +110,7 @@ export const Skills: React.FC = () => {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Categorized Skills Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -109,10 +121,12 @@ export const Skills: React.FC = () => {
                 <motion.div
                   key={category.id}
                   layout
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="rounded-2xl bg-theme-card border border-theme p-6 sm:p-7 card-shadow flex flex-col justify-between hover:border-theme-accent transition-all duration-200 group"
                 >
                   <div>

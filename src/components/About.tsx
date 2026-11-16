@@ -44,7 +44,11 @@ export const About: React.FC = () => {
     document.body.removeChild(link);
   };
 
-  const handlePreviewCv = () => {
+  const handlePreviewCv = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCvMenuOpen(false);
     setCvModalOpen(true);
   };
@@ -112,7 +116,13 @@ export const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-card border border-theme text-[13px] font-semibold text-theme-accent tracking-wider uppercase mb-3 card-shadow">
             <Sparkles className="w-4 h-4" />
             <span>{t.about.badge}</span>
@@ -120,23 +130,34 @@ export const About: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-theme-main tracking-tight">
             {t.about.heading}
           </h2>
-        </div>
+        </motion.div>
 
         {/* Main Grid: CIRCULAR Photo Card + Biography Details */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
           {/* Left Column: Visual Composition with Halo Ring (Style matched to Reference) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, scale: 0.94, y: 24 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 flex flex-col items-center justify-center"
           >
             <div className="relative flex flex-col items-center w-full max-w-[390px]">
               
-              {/* Glowing Circular Cyan Halo Ring (Reference Style - Prominently framing portrait) */}
-              <div className="absolute -top-10 sm:-top-14 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[430px] sm:h-[430px] md:w-[470px] md:h-[470px] rounded-full border-2 border-[#00D9F5] shadow-[0_0_50px_rgba(0,217,245,0.7),0_0_90px_rgba(0,217,245,0.35)] pointer-events-none z-0" />
+              {/* Glowing Circular Cyan Halo Ring with Breathing Pulse */}
+              <motion.div
+                animate={{
+                  opacity: [0.85, 1, 0.85],
+                  scale: [1, 1.02, 1],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 4.5,
+                  ease: 'easeInOut',
+                }}
+                className="absolute -top-10 sm:-top-14 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[430px] sm:h-[430px] md:w-[470px] md:h-[470px] rounded-full border-2 border-[#00D9F5] shadow-[0_0_50px_rgba(0,217,245,0.7),0_0_90px_rgba(0,217,245,0.35)] pointer-events-none z-0"
+              />
 
               {/* Second subtle outer concentric cyan ring */}
               <div className="absolute -top-14 sm:-top-20 left-1/2 -translate-x-1/2 w-[380px] h-[380px] sm:w-[480px] sm:h-[480px] md:w-[530px] md:h-[530px] rounded-full border border-[#00D9F5]/25 pointer-events-none z-0" />
@@ -168,7 +189,7 @@ export const About: React.FC = () => {
 
               {/* Two Quick Specialization Mini Cards */}
               <div className="relative z-10 mt-4 grid grid-cols-2 gap-3 w-full max-w-[360px] text-center">
-                <div className="p-3.5 rounded-xl bg-theme-card border border-theme card-shadow">
+                <div className="p-3.5 rounded-xl bg-theme-card border border-theme card-shadow hover:border-theme-accent transition-colors">
                   <span className="text-[11px] text-theme-muted font-medium block mb-0.5">
                     {language === 'ur' ? 'بنیادی توجہ' : 'Specialization'}
                   </span>
@@ -176,7 +197,7 @@ export const About: React.FC = () => {
                     AI Agents & RAG
                   </span>
                 </div>
-                <div className="p-3.5 rounded-xl bg-theme-card border border-theme card-shadow">
+                <div className="p-3.5 rounded-xl bg-theme-card border border-theme card-shadow hover:border-theme-accent transition-colors">
                   <span className="text-[11px] text-theme-muted font-medium block mb-0.5">
                     {language === 'ur' ? 'سسٹم ڈیزائن' : 'Engineering'}
                   </span>
@@ -191,10 +212,10 @@ export const About: React.FC = () => {
 
           {/* Right Column: Narrative, Identity, Interests & Actions */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 flex flex-col items-start"
           >
             {/* Core Narrative as specified */}
@@ -214,8 +235,9 @@ export const About: React.FC = () => {
                 {identityPillars.map((pillar, idx) => {
                   const Icon = pillar.icon;
                   return (
-                    <div
+                    <motion.div
                       key={idx}
+                      whileHover={{ y: -3, transition: { duration: 0.2 } }}
                       className="p-4.5 rounded-xl bg-theme-card border border-theme hover:border-theme-accent transition-all duration-200 flex items-start gap-3.5 card-shadow"
                     >
                       <div className="p-2.5 rounded-lg bg-theme-card-subtle border border-theme shrink-0 mt-0.5">
@@ -229,7 +251,7 @@ export const About: React.FC = () => {
                           {pillar.desc}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -243,13 +265,14 @@ export const About: React.FC = () => {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {t.about.interests.map((interest, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
-                    className="flex items-center gap-3 p-3.5 rounded-xl bg-theme-card border border-theme text-[13.5px] font-medium text-theme-main card-shadow"
+                    whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                    className="flex items-center gap-3 p-3.5 rounded-xl bg-theme-card border border-theme text-[13.5px] font-medium text-theme-main card-shadow hover:border-theme-accent transition-colors"
                   >
                     <CheckCircle2 className="w-4 h-4 text-theme-accent shrink-0" />
                     <span>{interest}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -261,12 +284,13 @@ export const About: React.FC = () => {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {technicalFocusPills.map((tech, idx) => (
-                  <span
+                  <motion.span
                     key={idx}
-                    className="px-3.5 py-2 rounded-lg bg-theme-card border border-theme text-[13px] font-medium text-theme-secondary hover:text-theme-main hover:border-theme-accent transition-colors card-shadow"
+                    whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                    className="px-3.5 py-2 rounded-lg bg-theme-card border border-theme text-[13px] font-medium text-theme-secondary hover:text-theme-main hover:border-theme-accent transition-colors card-shadow cursor-default"
                   >
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>
