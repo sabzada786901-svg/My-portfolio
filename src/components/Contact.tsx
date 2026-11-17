@@ -342,6 +342,18 @@ export const Contact: React.FC = () => {
                   </>
                 )}
               </button>
+
+              {/* Direct Email Option */}
+              <div className="pt-4 border-t border-theme flex flex-wrap items-center justify-between gap-3 text-xs text-theme-muted">
+                <span>{isRTL ? 'یا براہِ راست ای میل کریں:' : 'Or email directly at:'}</span>
+                <a
+                  href="mailto:qa004819ek@gmail.com"
+                  className="inline-flex items-center gap-1.5 font-semibold text-theme-accent hover:underline"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>qa004819ek@gmail.com</span>
+                </a>
+              </div>
             </form>
           )}
 
