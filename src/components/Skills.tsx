@@ -158,11 +158,7 @@ export const Skills: React.FC = () => {
                         return (
                           <div
                             key={sIdx}
-                            className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all duration-200 ${
-                              skill.highlight
-                                ? 'bg-theme-card-subtle border-theme hover:border-theme-accent'
-                                : 'bg-theme-card-subtle/60 border-theme hover:border-theme-accent/60'
-                            }`}
+                            className="flex items-center gap-2.5 p-3 rounded-xl border transition-all duration-200 bg-theme-card-subtle border-theme hover:border-theme-accent"
                           >
                             <div className="w-7 h-7 rounded-lg bg-theme-card border border-theme flex items-center justify-center shrink-0 card-shadow">
                               <ItemIcon className="w-3.5 h-3.5 text-theme-accent" />
@@ -170,9 +166,7 @@ export const Skills: React.FC = () => {
                             <span className="text-[13.5px] font-medium text-theme-main tracking-tight">
                               {skill.name}
                             </span>
-                            {skill.highlight && (
-                              <Check className="w-3.5 h-3.5 text-theme-accent ml-auto shrink-0 opacity-80" />
-                            )}
+                            <Check className="w-3.5 h-3.5 text-theme-accent ml-auto shrink-0 opacity-90" />
                           </div>
                         );
                       })}

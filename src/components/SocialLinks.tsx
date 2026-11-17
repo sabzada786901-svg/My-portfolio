@@ -44,7 +44,7 @@ export const TiktokIcon: React.FC<{ className?: string }> = ({ className = 'w-4 
 export const SOCIAL_LINKS: SocialLinkItem[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com/',
+    url: 'https://github.com/sabzada786901-svg',
     title: 'GitHub • Gull Muhammad',
     icon: GithubIcon,
     hoverClasses:
@@ -52,7 +52,7 @@ export const SOCIAL_LINKS: SocialLinkItem[] = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/feed/',
+    url: 'https://www.linkedin.com/in/gull-muhammad-91a56240a/recent-activity/all/',
     title: 'LinkedIn • Gull Muhammad',
     icon: LinkedinIcon,
     hoverClasses:
@@ -60,7 +60,7 @@ export const SOCIAL_LINKS: SocialLinkItem[] = [
   },
   {
     name: 'Facebook',
-    url: 'https://facebook.com/',
+    url: 'https://www.facebook.com/share/17hzjd35pn/',
     title: 'Facebook • Gull Muhammad',
     icon: FacebookIcon,
     hoverClasses:

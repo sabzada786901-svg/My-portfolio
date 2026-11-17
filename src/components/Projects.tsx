@@ -12,12 +12,19 @@ import {
   Zap,
   Globe,
   Cpu,
+  Layout,
+  Share2,
+  Palette,
+  CreditCard,
+  Gift,
+  Download,
+  ExternalLink,
 } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const { t, language, isRTL } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'ai-agents' | 'web-dev'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'ai-agents' | 'automation' | 'web-dev' | 'design'>('all');
 
   const filteredProjects =
     activeFilter === 'all'
@@ -28,6 +35,8 @@ export const Projects: React.FC = () => {
     switch (id) {
       case 'agenticaim':
         return Cpu;
+      case 'agenticaim-website':
+        return Globe;
       case 'aura-ai':
         return Bot;
       case 'webintel-ai':
@@ -36,9 +45,90 @@ export const Projects: React.FC = () => {
         return Sparkles;
       case 'kisan-dost-ai':
         return Zap;
+      case 'workflow-automation':
+        return Zap;
+      case 'personal-portfolio':
+      case 'portfolio-design':
+        return Layout;
+      case 'social-media-post':
+        return Share2;
+      case 'logo-design':
+        return Palette;
+      case 'business-cards':
+        return CreditCard;
+      case 'birthday-card':
+        return Gift;
       default:
         return Terminal;
     }
+  };
+
+  const handleQuickDownload = (project: Project) => {
+    // 1. Direct external link download (e.g. AgenticAim -> https://agenticaim.online/services.html#download-agent)
+    if (project.downloadType === 'link' && project.downloadUrl) {
+      window.open(project.downloadUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // 2. Direct Image download (e.g. AURA AI, WebIntel AI, AgenticAim Website, Social Media Posts)
+    if (project.downloadType === 'image' && (project.downloadUrl || project.gallery?.[0])) {
+      const a = document.createElement('a');
+      a.href = project.downloadUrl || project.gallery![0];
+      a.download = `${project.id}-showcase.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
+    // 3. Structured project overview document
+    const divider = '=====================================================';
+    const lines = [
+      divider,
+      `PROJECT OVERVIEW & SPECIFICATION`,
+      divider,
+      `Title: ${project.title}`,
+      `Category: ${project.categoryLabel}`,
+      `Status: ${project.status}`,
+      `Engineer / Designer: Gull Muhammad`,
+      `Designation: AI Agent Engineer & Web Developer`,
+      `Location: Faisalabad, Pakistan`,
+      ...(project.role ? ['', 'MY ROLE:', project.role] : []),
+      ...(project.vision ? ['', 'VISION:', project.vision] : []),
+      '',
+      `TAGLINE:`,
+      project.tagline,
+      '',
+      `DESCRIPTION:`,
+      project.description,
+      '',
+      `PROBLEM ADDRESSED:`,
+      project.problem,
+      '',
+      `ENGINEERING / DESIGN SOLUTION:`,
+      project.solution,
+      '',
+      `KEY FEATURES & DELIVERABLES:`,
+      ...project.features.map((f, i) => `  ${i + 1}. ${f}`),
+      '',
+      `CORE TECHNOLOGIES:`,
+      `  ${project.techStack.join(' • ')}`,
+      '',
+      divider,
+      `Gull Muhammad Portfolio: https://gull-portfolio.my.canva.site`,
+      `Contact: Available for AI Agent engineering, web platforms & visual design.`,
+      divider,
+    ];
+
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${project.id}-project-specification.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -97,6 +187,16 @@ export const Projects: React.FC = () => {
             {language === 'ur' ? 'اے آئی ایجنٹس اور سسٹمز' : 'AI Agents & Systems'}
           </button>
           <button
+            onClick={() => setActiveFilter('automation')}
+            className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
+              activeFilter === 'automation'
+                ? 'bg-theme-accent text-white card-shadow'
+                : 'bg-theme-card text-theme-secondary hover:text-theme-main border border-theme card-shadow'
+            }`}
+          >
+            {language === 'ur' ? 'ورک فلو آٹومیشن' : 'Workflow Automation'}
+          </button>
+          <button
             onClick={() => setActiveFilter('web-dev')}
             className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
               activeFilter === 'web-dev'
@@ -105,6 +205,16 @@ export const Projects: React.FC = () => {
             }`}
           >
             {language === 'ur' ? 'ویب ڈویلپمنٹ' : 'Web Engineering'}
+          </button>
+          <button
+            onClick={() => setActiveFilter('design')}
+            className={`px-4.5 py-2 rounded-full text-[14px] sm:text-[14.5px] font-medium transition-all duration-200 cursor-pointer ${
+              activeFilter === 'design'
+                ? 'bg-theme-accent text-white card-shadow'
+                : 'bg-theme-card text-theme-secondary hover:text-theme-main border border-theme card-shadow'
+            }`}
+          >
+            {language === 'ur' ? 'کینوا و گرافک ڈیزائن' : 'Creative Design'}
           </button>
         </motion.div>
 
@@ -132,9 +242,28 @@ export const Projects: React.FC = () => {
                         <Icon className="w-5 h-5 text-theme-accent" />
                       </div>
 
-                      <span className="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded bg-theme-card border border-theme text-theme-accent">
-                        {language === 'ur' ? project.statusUr : project.status}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {project.gallery && project.gallery.length > 0 && (
+                          <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-theme-accent/15 border border-theme-accent/30 text-theme-accent">
+                            {project.gallery.length} Designs
+                          </span>
+                        )}
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            title={`Open live: ${project.liveUrl}`}
+                            className="p-1.5 rounded-lg bg-theme-card border border-theme text-theme-secondary hover:text-theme-accent hover:border-theme-accent transition-colors card-shadow"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        <span className="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded bg-theme-card border border-theme text-theme-accent">
+                          {language === 'ur' ? project.statusUr : project.status}
+                        </span>
+                      </div>
                     </div>
 
                     <h3 className="text-[19px] sm:text-[20px] font-bold text-theme-main mb-1 group-hover:text-theme-accent transition-colors">
@@ -164,14 +293,29 @@ export const Projects: React.FC = () => {
                         ))}
                       </div>
 
-                      {/* View Details Action */}
-                      <button
-                        onClick={() => setSelectedProject(project)}
-                        className="w-full py-2.5 px-4 rounded-xl text-[13.5px] font-semibold text-theme-main bg-theme-card-subtle border border-theme hover:border-theme-accent hover:text-theme-accent transition-all flex items-center justify-center gap-2 cursor-pointer group/btn card-shadow"
-                      >
-                        <span>{t.projects.viewDetails}</span>
-                        <ArrowRight className={`w-4 h-4 text-theme-accent transition-transform duration-200 ${isRTL ? 'group-hover/btn:-translate-x-1' : 'group-hover/btn:translate-x-1'}`} />
-                      </button>
+                      {/* View Details & Quick Download Action */}
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setSelectedProject(project)}
+                          className="flex-1 py-2.5 px-4 rounded-xl text-[13.5px] font-semibold text-theme-main bg-theme-card-subtle border border-theme hover:border-theme-accent hover:text-theme-accent transition-all flex items-center justify-center gap-2 cursor-pointer group/btn card-shadow"
+                        >
+                          <span>{t.projects.viewDetails}</span>
+                          <ArrowRight className={`w-4 h-4 text-theme-accent transition-transform duration-200 ${isRTL ? 'group-hover/btn:-translate-x-1' : 'group-hover/btn:translate-x-1'}`} />
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleQuickDownload(project);
+                          }}
+                          title="Download Project Specification & Overview"
+                          aria-label={`Download ${project.title} Specs`}
+                          className="p-2.5 rounded-xl bg-theme-card-subtle border border-theme text-theme-secondary hover:text-theme-accent hover:border-theme-accent hover:shadow-[0_0_14px_rgba(0,217,245,0.3)] transition-all cursor-pointer card-shadow group"
+                        >
+                          <Download className="w-4 h-4 text-theme-accent group-hover:scale-110 transition-transform" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -184,6 +328,7 @@ export const Projects: React.FC = () => {
 
       {/* Project Detail Modal */}
       <ProjectDetailModal
+        key={selectedProject?.id || 'none'}
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
       />
