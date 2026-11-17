@@ -128,6 +128,7 @@ export const translations = {
         emailRequired: 'Please provide a valid email address.',
         subjectRequired: 'Please enter a subject.',
         messageRequired: 'Please enter your message (at least 10 characters).',
+        submitFailed: 'Failed to send message. Please try again or reach out directly at qa004819ek@gmail.com.',
       },
     },
     footer: {
@@ -277,6 +278,7 @@ export const translations = {
         emailRequired: 'براہ کرم درست ای میل ایڈریس فراہم کریں۔',
         subjectRequired: 'براہ کرم موضوع درج کریں۔',
         messageRequired: 'براہ کرم اپنا پیغام درج کریں (کم از کم 10 حروف)۔',
+        submitFailed: 'پیغام بھیجنے میں خرابی پیش آئی۔ براہ کرم دوبارہ کوشش کریں یا براہ راست qa004819ek@gmail.com پر رابطہ کریں۔',
       },
     },
     footer: {

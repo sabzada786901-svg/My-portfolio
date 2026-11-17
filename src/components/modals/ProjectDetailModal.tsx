@@ -33,7 +33,7 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
 
   const currentGalleryItem = project.galleryItems?.[activeImageIndex] || null;
 
-  const handleDownloadSpecific = (imgUrl: string, idx: number, e?: React.MouseEvent) => {
+  const handleDownloadSpecific = (imgUrl: string, idx: number, e?: React.MouseEvent, side?: 'front' | 'back') => {
     if (e) e.stopPropagation();
     const item = project.galleryItems?.[idx];
     const titleSnippet = item?.title
@@ -41,9 +41,11 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
       : project.galleryTitles?.[idx]
       ? project.galleryTitles[idx].toLowerCase().replace(/[^a-z0-9]/g, '-')
       : `design-${idx + 1}`;
+    const sideSuffix = side ? `-${side}` : '';
+    const ext = imgUrl.endsWith('.jpg') ? 'jpg' : 'png';
     const a = document.createElement('a');
     a.href = imgUrl;
-    a.download = `${project.id}-${titleSnippet}.png`;
+    a.download = `${project.id}-${titleSnippet}${sideSuffix}.${ext}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -60,11 +62,16 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
       return;
     }
 
-    // 2. Direct Image download (e.g. AURA AI, WebIntel AI, AgenticAim Website, Social Media Posts)
+    // 2. Direct Image download (e.g. AURA AI, WebIntel AI, AgenticAim Website, Social Media Posts, Business Cards)
     if (project.downloadType === 'image') {
       const activeUrl = project.gallery?.[activeImageIndex] || project.downloadUrl || project.image;
       if (activeUrl) {
-        handleDownloadSpecific(activeUrl, activeImageIndex);
+        handleDownloadSpecific(activeUrl, activeImageIndex, undefined, currentGalleryItem?.backImage ? 'front' : undefined);
+        if (currentGalleryItem?.backImage) {
+          setTimeout(() => {
+            handleDownloadSpecific(currentGalleryItem.backImage!, activeImageIndex, undefined, 'back');
+          }, 350);
+        }
         return;
       }
     }
@@ -126,6 +133,7 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
     if (downloaded) return 'Downloaded!';
     if (project.downloadType === 'link') return 'Download Agent';
     if (project.downloadType === 'image') {
+      if (currentGalleryItem?.backImage) return 'Download Both Sides';
       return project.gallery ? 'Download Active Design' : 'Download Image';
     }
     return 'Download Specs';
@@ -232,19 +240,75 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
               {galleryViewMode === 'slider' ? (
                 <div className="p-4 sm:p-5">
                   {/* Main Display Stage */}
-                  <div className="relative overflow-hidden rounded-xl bg-black/40 flex items-center justify-center min-h-[340px] max-h-[500px]">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={activeImageIndex}
-                        src={project.gallery[activeImageIndex]}
-                        alt={project.galleryTitles?.[activeImageIndex] || `Design ${activeImageIndex + 1}`}
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={{ duration: 0.25 }}
-                        className="max-h-[480px] w-auto max-w-full object-contain rounded-lg shadow-2xl"
-                      />
-                    </AnimatePresence>
+                  <div className="relative overflow-hidden rounded-xl bg-black/40 flex items-center justify-center p-3 sm:p-5 min-h-[340px]">
+                    {currentGalleryItem?.backImage ? (
+                      /* Dual-Sided Card Display (Both Front & Back Shown Together) */
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full items-center justify-center max-w-4xl py-2 px-1">
+                        {/* Front Side */}
+                        <div className="relative rounded-2xl overflow-hidden bg-[#071320] border border-theme p-3.5 flex flex-col items-center justify-center card-shadow group/card">
+                          <div className="w-full flex items-center justify-between mb-2.5 px-1">
+                            <span className="px-2.5 py-0.5 rounded-full bg-theme-accent/20 border border-theme-accent/40 text-[11px] font-bold text-theme-accent tracking-wider uppercase">
+                              {language === 'ur' ? 'فرنٹ سائیڈ (Front)' : 'Front Side'}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => handleDownloadSpecific(currentGalleryItem.image, activeImageIndex, e, 'front')}
+                              title="Download Front Side"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 text-[11px] font-medium transition-all cursor-pointer shadow-sm"
+                            >
+                              <Download className="w-3 h-3" />
+                              <span>Front</span>
+                            </button>
+                          </div>
+                          <div className="w-full flex items-center justify-center p-2 min-h-[220px]">
+                            <img
+                              src={currentGalleryItem.image}
+                              alt={`${currentGalleryItem.title} - Front Side`}
+                              className="max-h-[360px] w-auto max-w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover/card:scale-[1.02]"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Back Side */}
+                        <div className="relative rounded-2xl overflow-hidden bg-[#071320] border border-theme p-3.5 flex flex-col items-center justify-center card-shadow group/card">
+                          <div className="w-full flex items-center justify-between mb-2.5 px-1">
+                            <span className="px-2.5 py-0.5 rounded-full bg-[#F59E0B]/20 border border-[#F59E0B]/40 text-[11px] font-bold text-[#F59E0B] tracking-wider uppercase">
+                              {language === 'ur' ? 'بیک سائیڈ (Back)' : 'Back Side'}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => handleDownloadSpecific(currentGalleryItem.backImage!, activeImageIndex, e, 'back')}
+                              title="Download Back Side"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 text-[11px] font-medium transition-all cursor-pointer shadow-sm"
+                            >
+                              <Download className="w-3 h-3" />
+                              <span>Back</span>
+                            </button>
+                          </div>
+                          <div className="w-full flex items-center justify-center p-2 min-h-[220px]">
+                            <img
+                              src={currentGalleryItem.backImage}
+                              alt={`${currentGalleryItem.title} - Back Side`}
+                              className="max-h-[360px] w-auto max-w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover/card:scale-[1.02]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Single Image Display */
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={activeImageIndex}
+                          src={project.gallery[activeImageIndex]}
+                          alt={project.galleryTitles?.[activeImageIndex] || `Design ${activeImageIndex + 1}`}
+                          initial={{ opacity: 0, scale: 0.98 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.98 }}
+                          transition={{ duration: 0.25 }}
+                          className="max-h-[480px] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+                        />
+                      </AnimatePresence>
+                    )}
 
                     {/* Left / Right Nav Arrows */}
                     <button
@@ -255,7 +319,7 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
                         )
                       }
                       aria-label="Previous Design"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-theme-accent text-white border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-lg"
+                      className="absolute left-2.5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/70 hover:bg-theme-accent text-white border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-xl z-20"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
@@ -268,23 +332,25 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
                         )
                       }
                       aria-label="Next Design"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-theme-accent text-white border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-lg"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/70 hover:bg-theme-accent text-white border border-white/20 transition-all cursor-pointer backdrop-blur-sm shadow-xl z-20"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
 
-                    {/* Quick Download Floating Button on active image */}
-                    <button
-                      type="button"
-                      onClick={(e) =>
-                        handleDownloadSpecific(project.gallery![activeImageIndex], activeImageIndex, e)
-                      }
-                      title="Download this specific design"
-                      className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 text-xs font-medium backdrop-blur-sm transition-all cursor-pointer"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>Save Design</span>
-                    </button>
+                    {/* Quick Download Floating Button (only when single image) */}
+                    {!currentGalleryItem?.backImage && (
+                      <button
+                        type="button"
+                        onClick={(e) =>
+                          handleDownloadSpecific(project.gallery![activeImageIndex], activeImageIndex, e)
+                        }
+                        title="Download this specific design"
+                        className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 text-xs font-medium backdrop-blur-sm transition-all cursor-pointer"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Save Design</span>
+                      </button>
+                    )}
                   </div>
 
                   {/* Thumbnail Strip */}
@@ -297,19 +363,28 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
                           key={idx}
                           type="button"
                           onClick={() => setActiveImageIndex(idx)}
-                          className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer group bg-black/50 ${
+                          className={`relative flex-shrink-0 ${
+                            item?.backImage ? 'w-24 sm:w-28' : 'w-16 sm:w-20'
+                          } h-16 sm:h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer group bg-black/50 ${
                             isActive
                               ? 'border-theme-accent shadow-[0_0_12px_rgba(0,217,245,0.5)] scale-105'
                               : 'border-theme opacity-65 hover:opacity-100 hover:border-theme-accent/60'
                           }`}
                         >
-                          <img
-                            src={img}
-                            alt={item?.title || project.galleryTitles?.[idx] || `Thumbnail ${idx + 1}`}
-                            className="w-full h-full object-contain p-1"
-                          />
-                          <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[9.5px] font-semibold text-white text-center py-0.5 truncate px-1">
-                            {idx + 1}
+                          {item?.backImage ? (
+                            <div className="w-full h-full grid grid-cols-2 p-1 gap-1 bg-black/40 items-center justify-center">
+                              <img src={item.image} alt="Front" className="w-full h-full object-contain" />
+                              <img src={item.backImage} alt="Back" className="w-full h-full object-contain" />
+                            </div>
+                          ) : (
+                            <img
+                              src={img}
+                              alt={item?.title || project.galleryTitles?.[idx] || `Thumbnail ${idx + 1}`}
+                              className="w-full h-full object-contain p-1"
+                            />
+                          )}
+                          <span className="absolute bottom-0 inset-x-0 bg-black/85 text-[9px] font-semibold text-white text-center py-0.5 truncate px-1">
+                            {item?.backImage ? `${idx + 1}. Front & Back` : idx + 1}
                           </span>
                         </button>
                       );
@@ -340,22 +415,45 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
                         </p>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={(e) =>
-                          handleDownloadSpecific(project.gallery![activeImageIndex], activeImageIndex, e)
-                        }
-                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-theme-accent text-white text-xs font-semibold hover:opacity-95 transition-all self-start sm:self-center cursor-pointer shadow-md flex-shrink-0"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>{language === 'ur' ? 'ڈیزائن محفوظ کریں' : 'Save Design'}</span>
-                      </button>
+                      <div className="flex flex-wrap items-center gap-2 self-start sm:self-center flex-shrink-0">
+                        {currentGalleryItem.backImage ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={(e) => handleDownloadSpecific(currentGalleryItem.image, activeImageIndex, e, 'front')}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-accent text-white text-xs font-semibold hover:opacity-95 transition-all cursor-pointer shadow-md"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                              <span>{language === 'ur' ? 'فرنٹ ڈاؤن لوڈ' : 'Download Front'}</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => handleDownloadSpecific(currentGalleryItem.backImage!, activeImageIndex, e, 'back')}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F59E0B] text-black text-xs font-semibold hover:opacity-95 transition-all cursor-pointer shadow-md"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                              <span>{language === 'ur' ? 'بیک ڈاؤن لوڈ' : 'Download Back'}</span>
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={(e) =>
+                              handleDownloadSpecific(project.gallery![activeImageIndex], activeImageIndex, e)
+                            }
+                            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-theme-accent text-white text-xs font-semibold hover:opacity-95 transition-all cursor-pointer shadow-md"
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            <span>{language === 'ur' ? 'ڈیزائن محفوظ کریں' : 'Save Design'}</span>
+                          </button>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
               ) : (
                 /* Grid View: Show all images simultaneously with individual descriptions! */
-                <div className="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                   {project.gallery.map((img, idx) => {
                     const item = project.galleryItems?.[idx];
                     return (
@@ -367,21 +465,68 @@ export const ProjectDetailModal: React.FC<Props> = ({ project, onClose }) => {
                         }}
                         className="group relative rounded-xl overflow-hidden border border-theme bg-black/40 hover:border-theme-accent transition-all cursor-pointer flex flex-col justify-between card-shadow"
                       >
-                        <div className="relative aspect-square overflow-hidden flex items-center justify-center p-3 bg-[#0a1622]/60">
-                          <img
-                            src={img}
-                            alt={item?.title || `Design ${idx + 1}`}
-                            className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
-                          />
-                          <button
-                            type="button"
-                            onClick={(e) => handleDownloadSpecific(img, idx, e)}
-                            title="Download Design"
-                            className="absolute top-3 right-3 p-1.5 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer shadow-md"
-                          >
-                            <Download className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                        {item?.backImage ? (
+                          /* Dual-Sided Grid Tile */
+                          <div className="p-3 bg-[#0a1622]/60">
+                            <div className="grid grid-cols-2 gap-2.5 mb-1.5">
+                              <div className="relative rounded-lg overflow-hidden bg-black/50 border border-theme p-1.5 flex flex-col items-center justify-center">
+                                <span className="absolute top-1 left-1 text-[9px] font-bold text-theme-accent bg-black/80 px-1.5 rounded">
+                                  FRONT
+                                </span>
+                                <img
+                                  src={item.image}
+                                  alt={`${item.title} Front`}
+                                  className="max-h-[160px] w-auto object-contain rounded"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleDownloadSpecific(item.image, idx, e, 'front')}
+                                  title="Download Front"
+                                  className="absolute bottom-1 right-1 p-1 rounded bg-black/80 hover:bg-theme-accent text-white transition-colors"
+                                >
+                                  <Download className="w-3 h-3" />
+                                </button>
+                              </div>
+
+                              <div className="relative rounded-lg overflow-hidden bg-black/50 border border-theme p-1.5 flex flex-col items-center justify-center">
+                                <span className="absolute top-1 left-1 text-[9px] font-bold text-[#F59E0B] bg-black/80 px-1.5 rounded">
+                                  BACK
+                                </span>
+                                <img
+                                  src={item.backImage}
+                                  alt={`${item.title} Back`}
+                                  className="max-h-[160px] w-auto object-contain rounded"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleDownloadSpecific(item.backImage!, idx, e, 'back')}
+                                  title="Download Back"
+                                  className="absolute bottom-1 right-1 p-1 rounded bg-black/80 hover:bg-theme-accent text-white transition-colors"
+                                >
+                                  <Download className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          /* Single Side Grid Tile */
+                          <div className="relative aspect-square overflow-hidden flex items-center justify-center p-3 bg-[#0a1622]/60">
+                            <img
+                              src={img}
+                              alt={item?.title || `Design ${idx + 1}`}
+                              className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <button
+                              type="button"
+                              onClick={(e) => handleDownloadSpecific(img, idx, e)}
+                              title="Download Design"
+                              className="absolute top-3 right-3 p-1.5 rounded-lg bg-black/70 hover:bg-theme-accent text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer shadow-md"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        )}
+
                         <div className="p-3 bg-theme-card-subtle/90 border-t border-theme">
                           <div className="flex items-center justify-between text-[12.5px] font-bold text-theme-main mb-1">
                             <span className="truncate">{item ? (language === 'ur' ? item.titleUr : item.title) : `Design #${idx + 1}`}</span>

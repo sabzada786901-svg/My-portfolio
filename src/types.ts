@@ -2,6 +2,7 @@ export type Language = 'en' | 'ur';
 
 export interface GalleryItem {
   image: string;
+  backImage?: string;
   title: string;
   titleUr: string;
   tagline?: string;

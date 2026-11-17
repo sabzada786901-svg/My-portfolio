@@ -27,6 +27,7 @@ export const Contact: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -52,22 +53,52 @@ export const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate reliable secure dispatch & local logging
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/qa004819ek@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          _subject: `New Portfolio Message: ${formData.subject.trim()}`,
+          message: formData.message.trim(),
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success === 'true' || data.success === true)) {
+        setIsSubmitted(true);
+      } else if (data.message && data.message.toLowerCase().includes('activation')) {
+        // FormSubmit confirmation sent to inbox
+        setIsSubmitted(true);
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err: unknown) {
+      console.error('Contact form dispatch error:', err);
+      setSubmitError(t.contact.errors.submitFailed);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 900);
+    }
   };
 
   const handleReset = () => {
     setFormData({ name: '', email: '', subject: '', message: '' });
     setErrors({});
+    setSubmitError(null);
     setIsSubmitted(false);
   };
 
@@ -276,6 +307,22 @@ export const Contact: React.FC = () => {
                   </p>
                 )}
               </div>
+
+              {/* Submission Error Banner */}
+              {submitError && (
+                <div className="p-4 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/30 text-sm text-[#EF4444] flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="font-medium">{submitError}</p>
+                    <a
+                      href={`mailto:qa004819ek@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`}
+                      className="inline-block mt-2 text-xs font-semibold underline text-theme-accent hover:opacity-80 transition-opacity"
+                    >
+                      qa004819ek@gmail.com
+                    </a>
+                  </div>
+                </div>
+              )}
 
               {/* Submit Button with Enhanced Hover Effects */}
               <button

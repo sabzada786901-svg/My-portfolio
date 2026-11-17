@@ -16,7 +16,6 @@ import {
   Share2,
   Palette,
   CreditCard,
-  Gift,
   Download,
   ExternalLink,
 } from 'lucide-react';
@@ -56,8 +55,6 @@ export const Projects: React.FC = () => {
         return Palette;
       case 'business-cards':
         return CreditCard;
-      case 'birthday-card':
-        return Gift;
       default:
         return Terminal;
     }
@@ -70,14 +67,29 @@ export const Projects: React.FC = () => {
       return;
     }
 
-    // 2. Direct Image download (e.g. AURA AI, WebIntel AI, AgenticAim Website, Social Media Posts)
+    // 2. Direct Image download (e.g. AURA AI, WebIntel AI, AgenticAim Website, Social Media Posts, Business Cards)
     if (project.downloadType === 'image' && (project.downloadUrl || project.gallery?.[0])) {
+      const targetUrl = project.downloadUrl || project.gallery![0];
+      const ext = targetUrl.endsWith('.jpg') ? 'jpg' : 'png';
       const a = document.createElement('a');
-      a.href = project.downloadUrl || project.gallery![0];
-      a.download = `${project.id}-showcase.jpg`;
+      a.href = targetUrl;
+      a.download = `${project.id}-showcase.${ext}`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
+      if (project.galleryItems?.[0]?.backImage) {
+        setTimeout(() => {
+          const backUrl = project.galleryItems![0].backImage!;
+          const bExt = backUrl.endsWith('.jpg') ? 'jpg' : 'png';
+          const b = document.createElement('a');
+          b.href = backUrl;
+          b.download = `${project.id}-showcase-back.${bExt}`;
+          document.body.appendChild(b);
+          b.click();
+          document.body.removeChild(b);
+        }, 350);
+      }
       return;
     }
 

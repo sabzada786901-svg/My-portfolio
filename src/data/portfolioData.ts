@@ -789,7 +789,81 @@ export const PROJECTS: Project[] = [
     techStack: ['Canva Pro', 'Print-Ready 300 DPI', 'QR Code Tech', 'Typography', 'Stationery'],
     status: 'Print & Digital Asset',
     statusUr: 'پرنٹ و ڈیجیٹل ایسٹ',
-    accentColor: '#10B981'
+    accentColor: '#10B981',
+    image: '/assets/projects/business-cards/card2-front.png',
+    gallery: [
+      '/assets/projects/business-cards/card2-front.png',
+      '/assets/projects/business-cards/card1-front.png',
+      '/assets/projects/business-cards/card3-front.png',
+      '/assets/projects/business-cards/card4-front.png',
+      '/assets/projects/business-cards/card5-front.png'
+    ],
+    galleryTitles: [
+      'Modern Tech Card (Gull Muhammad)',
+      'Executive Portrait Card (Gull Muhammad)',
+      'Collab Studio Corporate Card',
+      'Apex Design Hexagon Card',
+      'Syed Zada Property Dealer Card'
+    ],
+    galleryItems: [
+      {
+        image: '/assets/projects/business-cards/card2-front.png',
+        backImage: '/assets/projects/business-cards/card2-back.png',
+        title: 'Modern Tech Card - Gull Muhammad',
+        titleUr: 'ماڈرن ٹیک بزنس کارڈ - گل محمد',
+        tagline: 'AI Agent Engineer & Web Developer • Dual-Sided with QR Code',
+        taglineUr: 'اے آئی ایجنٹ انجینئر و ویب ڈویلپر • کیو آر کوڈ کے ساتھ دو طرفہ کارڈ',
+        description: 'Modern high-contrast monochrome corporate card featuring a floating geometric cubes pattern and instant-scan portfolio QR code on the front, paired with structured designation badges, address, and verified contact credentials on the back.',
+        descriptionUr: 'جدید بلیک اینڈ وائٹ کارڈ جس کے فرنٹ پر جیومیٹرک پیٹرن اور کیو آر کوڈ دیا گیا ہے، اور بیک پر اے آئی ایجنٹ انجینئر و ویب ڈویلپر کی اسکلز، فون نمبر اور ایڈریس درج ہے۔',
+        tag: 'Tech & Portfolio'
+      },
+      {
+        image: '/assets/projects/business-cards/card1-front.png',
+        backImage: '/assets/projects/business-cards/card1-back.jpg',
+        title: 'Executive Portrait Card - Gull Muhammad',
+        titleUr: 'ایگزیکٹو پورٹریٹ کارڈ - گل محمد',
+        tagline: 'Vertical Luxury Card with Personal Portrait & Monogram',
+        taglineUr: 'عمودی پرتعیش بزنس کارڈ مع ذاتی تصویر و برانڈ مونوگرام',
+        description: 'Vertical luxury stationery featuring a minimalist gold and white diamond emblem on the front, and a distinctive circular portrait frame, contact numbers, email, and Canva portfolio link on the back.',
+        descriptionUr: 'عمودی انداز میں تیار کردہ ایگزیکٹو بزنس کارڈ جس کے فرنٹ پر گولڈن مونوگرام اور بیک پر تصویر، فون نمبر، ای میل اور پورٹ فولیو کا لنک شامل ہے۔',
+        tag: 'Vertical Portrait'
+      },
+      {
+        image: '/assets/projects/business-cards/card3-front.png',
+        backImage: '/assets/projects/business-cards/card3-back.png',
+        title: 'Collab Studio Corporate Card',
+        titleUr: 'کولاب اسٹوڈیو کارپوریٹ کارڈ',
+        tagline: 'General Manager Executive Card on Midnight Navy Palette',
+        taglineUr: 'جنرل مینیجر کے لیے پروقار مڈنائٹ نیوی کارڈ',
+        description: 'High-end dual-sided executive card showcasing the circular Collab Studio stepped mark on deep navy on the front, and a clean split-panel layout with General Manager title and office credentials on the back.',
+        descriptionUr: 'کولاب اسٹوڈیو کا دو طرفہ کارپوریٹ کارڈ جس کے فرنٹ پر گہرے نیلے بیک گراؤنڈ پر لوگو اور بیک پر جنرل مینیجر کا نام اور تمام دفتری رابطے واضح ہیں۔',
+        tag: 'Corporate Agency'
+      },
+      {
+        image: '/assets/projects/business-cards/card4-front.png',
+        backImage: '/assets/projects/business-cards/card4-back.png',
+        title: 'Apex Design Hexagon Card',
+        titleUr: 'ایپیکس ڈیزائن ہیکساگون کارڈ',
+        tagline: 'Hexagonal Geometric Identity with Scannable QR Code',
+        taglineUr: 'ہیکساگونل جیومیٹرک ڈیزائن مع فوری کیو آر کوڈ پورٹ فولیو',
+        description: 'Striking dual-sided stationery built with high-contrast black and warm golden-amber diagonal framing, front-side scannable portfolio QR code with diamond mark, and full corporate brand contact details on the back.',
+        descriptionUr: 'بلیک اور ایمبر گولڈ کے امتزاج میں ہیکساگونل فریم والا بزنس کارڈ جس کے فرنٹ پر پورٹ فولیو کیو آر کوڈ اور بیک پر برانڈ نیم، لوکیشن اور سوشل لنکس ہیں۔',
+        tag: 'Hexagon Geometry'
+      },
+      {
+        image: '/assets/projects/business-cards/card5-front.png',
+        backImage: '/assets/projects/business-cards/card5-back.png',
+        title: 'Syed Zada Property Dealer Card',
+        titleUr: 'سید زادہ پراپرٹی ڈیلر کارڈ',
+        tagline: 'Real Estate Executive Card with Chevron Arrow Styling',
+        taglineUr: 'شیوران ایرو اسٹائلنگ مع رئیل اسٹیٹ سروسز',
+        description: 'Distinctive real estate business card with mountain-roofline emblem and "Buy • Sell • Rent" badge on the front, accompanied by property dealer credentials, website, location, and scannable QR code on the back.',
+        descriptionUr: 'رئیل اسٹیٹ بزنس کارڈ جس کے فرنٹ پر ماؤنٹین روف لائن لوگو اور "خرید و فروخت" کی سروسز ہیں، اور بیک پر ڈیلر کے رابطہ نمبرز، ویب سائٹ اور کیو آر کوڈ موجود ہیں۔',
+        tag: 'Real Estate'
+      }
+    ],
+    downloadUrl: '/assets/projects/business-cards/card2-front.png',
+    downloadType: 'image'
   },
   {
     id: 'portfolio-design',
@@ -818,42 +892,164 @@ export const PROJECTS: Project[] = [
       'سی وی دیکھنے اور ڈاؤن لوڈ کرنے کی فوری سہولت',
       'موبائل اور کمپیوٹر پر بغیر کسی نقص کے مکمل ریسپانسیو لے آؤٹ'
     ],
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'UI/UX Design'],
+    techStack: ['Canva Pro', 'UI/UX Architecture', 'Brand Presentation', 'Layout Design', 'Graphic Systems'],
     status: 'Completed & Production Ready',
     statusUr: 'مکمل اور پروڈکشن ریڈی',
-    accentColor: '#00D9F5'
-  },
-  {
-    id: 'birthday-card',
-    title: 'Birthday Card Design',
-    titleUr: 'برتھ ڈے کارڈ ڈیزائن',
-    tagline: 'Vibrant, Personalized Greeting & Celebration Cards',
-    taglineUr: 'دلفریب، کسٹمائزڈ اور یادگار برتھ ڈے مبارکباد کارڈز',
-    category: 'design',
-    categoryLabel: 'Greeting & Celebration',
-    categoryLabelUr: 'مبارکباد و تقریبات',
-    description: 'Custom personalized digital and print celebration greeting cards featuring creative illustrations, warm typography, custom photo layouts, and festive themes.',
-    descriptionUr: 'کینوا پرو پر تیار کردہ خصوصی اور خوبصورت برتھ ڈے کارڈز جن میں دلکش السٹریشنز، دل نشین فونٹس اور تہوار کے رنگ شامل ہیں۔',
-    problem: 'Store-bought or plain greeting templates lack personal sentiment, unique visual character, and fail to evoke genuine emotional warmth for special occasions.',
-    problemUr: 'مارکیٹ کے روایتی کارڈز میں ذاتی محبت اور خوبصورت ڈیزائن کا فقدان ہوتا ہے۔',
-    solution: 'Crafted festive, heart-warming card compositions combining hand-picked holiday palettes, celebratory typography, and print-ready dimensions for memorable gifting.',
-    solutionUr: 'ایک ایسا دلکش کارڈ لے آؤٹ تیار کیا جس میں تہوار کے رنگوں، خوبصورت کلمات اور پرنٹ و ڈیجیٹل شیئرنگ کی تمام خوبیاں موجود ہیں۔',
-    features: [
-      'Heartfelt celebration typography with festive color harmony',
-      'High-resolution multi-format outputs (Print PDF, JPG, Social PNG)',
-      'Customized photo framing and personalized blessing texts',
-      'Both folding print card and single-page digital card layouts'
+    accentColor: '#00D9F5',
+    image: '/assets/projects/portfolio-design/1.png',
+    gallery: [
+      '/assets/projects/portfolio-design/1.png',
+      '/assets/projects/portfolio-design/2.png',
+      '/assets/projects/portfolio-design/3.png',
+      '/assets/projects/portfolio-design/4.png',
+      '/assets/projects/portfolio-design/5.png',
+      '/assets/projects/portfolio-design/6.png',
+      '/assets/projects/portfolio-design/7.png',
+      '/assets/projects/portfolio-design/8.png',
+      '/assets/projects/portfolio-design/9.png',
+      '/assets/projects/portfolio-design/10.png',
+      '/assets/projects/portfolio-design/11.png',
+      '/assets/projects/portfolio-design/12.png'
     ],
-    featuresUr: [
-      'خوبصورت مبارکبادی فونٹس اور دلفریب رنگوں کا امتزاج',
-      'پرنٹ اور ڈیجیٹل دونوں کے لیے ہائی ریزولوشن فارمیٹس',
-      'تصویر لگانے اور ذاتی پیغامات لکھنے کی گنجائش',
-      'فولڈنگ کارڈ اور سنگل پیج دونوں ڈیزائنز'
+    galleryTitles: [
+      '1. Hero Section - Introduction',
+      '2. About Me - Stats & Profile',
+      '3. Resume - Education & Experience',
+      '4. Portfolio Showcase - All Works',
+      '5. Portfolio - Social Media Posts',
+      '6. Portfolio - Business Cards Design',
+      '7. Portfolio - YouTube & TikTok Thumbnails',
+      '8. Portfolio - Logos & Brand Marks',
+      '9. Portfolio - Back Covers & Banners',
+      '10. Testimonials - Client Reviews',
+      '11. Contact - Get in Touch & Hire Me',
+      '12. Thank You - Closing Note'
     ],
-    techStack: ['Canva Pro', 'Custom Illustrations', 'Festive Color Palettes', 'Print Layouts'],
-    status: 'Personalized Digital Asset',
-    statusUr: 'پرسنلائزڈ ڈیجیٹل ڈیزائن',
-    accentColor: '#F59E0B'
+    galleryItems: [
+      {
+        image: '/assets/projects/portfolio-design/1.png',
+        title: '01. Hero Section - Introduction',
+        titleUr: '۰۱۔ ہیرو سیکشن - تعارف',
+        tagline: 'Hi There! I\'m Gull Muhammad • Graphics Designer & Photographer',
+        taglineUr: 'میرا نام گل محمد ہے • گرافکس ڈیزائنر و فوٹوگرافر',
+        description: 'Primary landing screen featuring bold high-contrast typography, personal circular portrait with radial service icons, and clear "Ready to Handle Your New Projects" headline.',
+        descriptionUr: 'پورٹ فولیو کا بنیادی صفحہ جس میں جلی حروف، ذاتی پورٹریٹ، سروسز آئیکونز اور "نئے پراجیکٹس کے لیے دستیاب" کی واضح کال ٹو ایکشن موجود ہے۔',
+        tag: 'Slide 01: Hero'
+      },
+      {
+        image: '/assets/projects/portfolio-design/2.png',
+        title: '02. About Me - Professional Profile',
+        titleUr: '۰۲۔ اباؤٹ می - پیشہ ورانہ تعارف',
+        tagline: '3+ Years Experience • 350+ Projects • 250+ Happy Clients',
+        taglineUr: '3+ سال کا تجربہ • 350+ پراجیکٹس • 250+ مطمئن کلائنٹس',
+        description: 'About Me screen highlighting core statistics in stylish hexagonal metrics, detailing Canva branding expertise, and showcasing a persistent navigation sidebar.',
+        descriptionUr: 'پیشہ ورانہ تعارف جس میں ہیکساگونل شکلوں میں اعداد و شمار (350+ پراجیکٹس، 250+ کلائنٹس) اور سائیڈ نیویگیشن مینو شامل ہے۔',
+        tag: 'Slide 02: About'
+      },
+      {
+        image: '/assets/projects/portfolio-design/3.png',
+        title: '03. Resume - Education & Timeline',
+        titleUr: '۰۳۔ ریزیومے - تعلیم و تجربہ',
+        tagline: 'Intermediate Computer Science & Professional Graphic Design Experience',
+        taglineUr: 'انٹرمیڈیٹ کمپیوٹر سائنس اور پروفیشنل گرافک ڈیزائن کا عملی تجربہ',
+        description: 'Structured resume slide mapping academic background in computer science along with graphic design and global freelance milestones from 2023 to the present.',
+        descriptionUr: 'تعلیمی قابلیت (کمپیوٹر سائنس) اور 2023 سے تا حال گرافک ڈیزائننگ اور فری لانسنگ کے عملی سنگ میل کا باقاعدہ خاکہ۔',
+        tag: 'Slide 03: Resume'
+      },
+      {
+        image: '/assets/projects/portfolio-design/4.png',
+        title: '04. Portfolio - All Projects Overview',
+        titleUr: '۰۴۔ پورٹ فولیو - تمام پراجیکٹس اوورویو',
+        tagline: 'Categorized Work Matrix • Posts, Cards, Logos, Thumbnails & Banners',
+        taglineUr: 'پراجیکٹس کا جامع میٹرکس • پوسٹس، کارڈز، لوگوز، تھمب نیلز اور بینرز',
+        description: 'Master portfolio grid showcasing a wide spectrum of creative deliverables across clothing mockups, infographics, marketing posters, and brand marks.',
+        descriptionUr: 'تمام کیٹیگریز پر مشتمل ماسٹر گرڈ جس میں ہوڈی ماک اپس، انفوگرافکس، بینرز اور لوگو ڈیزائنز ایک ساتھ دکھائی دیتے ہیں۔',
+        tag: 'Slide 04: All Works'
+      },
+      {
+        image: '/assets/projects/portfolio-design/5.png',
+        title: '05. Portfolio - Social Media Posts',
+        titleUr: '۰۵۔ پورٹ فولیو - سوشل میڈیا پوسٹس',
+        tagline: 'High-Conversion Promotional Graphics & Advertising Campaigns',
+        taglineUr: 'پرکشش پروموشنل پوسٹس اور کمرشل اشتہارات',
+        description: 'Dedicated social media showcase presenting digital photography flyers, food menu layouts, marketing agency graphics, and automotive car rental banners.',
+        descriptionUr: 'سوشل میڈیا کے لیے تیار کردہ پوسٹس کا خصوصی شوکیس: فوٹوگرافی فلائر، فوڈ مینو، مارکیٹنگ ایجنسی پوسٹر اور کار رینٹل بینر۔',
+        tag: 'Slide 05: Posts'
+      },
+      {
+        image: '/assets/projects/portfolio-design/6.png',
+        title: '06. Portfolio - Business Cards Design',
+        titleUr: '۰۶۔ پورٹ فولیو - بزنس کارڈز ڈیزائن',
+        tagline: 'Dual-Sided Executive Stationery with Embedded QR Codes',
+        taglineUr: 'کیو آر کوڈ سے لیس پروقار دو طرفہ بزنس کارڈز',
+        description: 'Business card showcase displaying modern monochrome corporate cards and warm geometric hexagon stationery complete with contact credentials and QR codes.',
+        descriptionUr: 'پیشہ ورانہ بزنس کارڈز کا ڈسپلے جس میں بلیک اینڈ وائٹ اور گولڈن ہیکساگونل کارڈز کے فرنٹ اور بیک شامل ہیں۔',
+        tag: 'Slide 06: Cards'
+      },
+      {
+        image: '/assets/projects/portfolio-design/7.png',
+        title: '07. Portfolio - YouTube & TikTok Thumbnails',
+        titleUr: '۰۷۔ پورٹ فولیو - یوٹیوب و ٹک ٹاک تھمب نیلز',
+        tagline: 'High-CTR Angled Thumbnails with Compelling Visual Hooks',
+        taglineUr: 'ہائی کلک تھرو ریٹ (CTR) والے پرکشش ویڈیو تھمب نیلز',
+        description: 'Dynamic thumbnail designs for viral video content including "How to Create UK TikTok Account" and "Build Powerful AI Agents in 10 Minutes" featuring custom cutout graphics.',
+        descriptionUr: 'وائرل ویڈیوز کے لیے ہائی CTR تھمب نیلز: یو کے ٹک ٹاک اکاؤنٹ اور 10 منٹ میں اے آئی ایجنٹس بنانے کے طریقہ کار پر مبنی ڈیزائنز۔',
+        tag: 'Slide 07: Thumbnails'
+      },
+      {
+        image: '/assets/projects/portfolio-design/8.png',
+        title: '08. Portfolio - Logos & Brand Marks',
+        titleUr: '۰۸۔ پورٹ فولیو - لوگو اور برانڈ شناخت',
+        tagline: 'Vector Brand Identity Suite • Real Estate, Eco, Studio & Fashion',
+        taglineUr: 'ویکٹر لوگو شناخت • رئیل اسٹیٹ، نیچر، اسٹوڈیو اور فیشن',
+        description: 'Presentation grid displaying 6 custom minimalist logos: Home Properties, Leaf Style, Collab Studio, Logo Style, Apex Design, and Anna & Gretta.',
+        descriptionUr: 'چھ منفرد برانڈ لوگوز کا تصویری مجموعہ: ہوم پراپرٹیز، لیف اسٹائل، کولاب اسٹوڈیو، لوگو اسٹائل، ایپیکس ڈیزائن اور اینا اینڈ گریٹا۔',
+        tag: 'Slide 08: Logos'
+      },
+      {
+        image: '/assets/projects/portfolio-design/9.png',
+        title: '09. Portfolio - Back Covers & Banners',
+        titleUr: '۰۹۔ پورٹ فولیو - بیک کورز و بینرز',
+        tagline: 'Wide-Format Social Media Banners & Channel Art',
+        taglineUr: 'سوشل میڈیا ہائی ڈیفینیشن بینرز اور چینل آرٹ',
+        description: 'Wide panoramic social header designs for LinkedIn, YouTube, and Facebook featuring cyber-tech hexagons, personal portraits, and AI engineering services.',
+        descriptionUr: 'لنکڈ ان، فیس بک اور یوٹیوب کے لیے چوڑے بینرز جن میں اے آئی آٹومیشن، کینوا ڈیزائن اور تکنیکی مہارتوں کو پیش کیا گیا ہے۔',
+        tag: 'Slide 09: Banners'
+      },
+      {
+        image: '/assets/projects/portfolio-design/10.png',
+        title: '10. Testimonials - Client Reviews',
+        titleUr: '۱۰۔ ٹیسٹیمونیئلز - کلائنٹ ریویوز',
+        tagline: 'Trusted by Clients Worldwide for Speed, Quality & Communication',
+        taglineUr: 'رفتار، معیار اور بہترین رابطے کے لیے کلائنٹس کا اعتماد',
+        description: 'Client feedback cards highlighting five-star reviews on complex product transformation, wireframing, prompt delivery, and seamless collaboration.',
+        descriptionUr: 'بین الاقوامی کلائنٹس کے تصدیقی تاثرات جو تیز رفتار ڈیلیوری، معیاری ڈیزائن اور اعلیٰ کارکردگی کی گواہی دیتے ہیں۔',
+        tag: 'Slide 10: Reviews'
+      },
+      {
+        image: '/assets/projects/portfolio-design/11.png',
+        title: '11. Contact - Get in Touch & Hire Me',
+        titleUr: '۱۱۔ رابطہ - رابطہ کریں اور ہائر کریں',
+        tagline: 'Available for Freelance Projects, Branding & Collaborations',
+        taglineUr: 'فری لانس پراجیکٹس، برانڈنگ اور باہمی تعاون کے لیے دستیاب',
+        description: 'Direct contact section providing live Canva portfolio URL, active phone lines (+92 328-8394863, +92 343-1771416), LinkedIn link, and scannable QR code.',
+        descriptionUr: 'رابطے کا مکمل صفحہ مع کینوا پورٹ فولیو لنک، دو فون نمبرز، لنکڈ ان ایڈریس اور اسکین ایبل کیو آر کوڈ۔',
+        tag: 'Slide 11: Contact'
+      },
+      {
+        image: '/assets/projects/portfolio-design/12.png',
+        title: '12. Thank You - Closing Slide',
+        titleUr: '۱۲۔ شکریہ - اختتامی سلائیڈ',
+        tagline: 'Thank You for Visiting My Portfolio • "Creativity turns ideas into reality"',
+        taglineUr: 'پورٹ فولیو وزٹ کرنے کا شکریہ • "تخلیقیت خوابوں کو حقیقت میں بدلتی ہے"',
+        description: 'Final appreciation screen with a warm message, handshake collaboration icon, and the signature motto: "Creativity turns ideas into reality."',
+        descriptionUr: 'شکریہ کی اختتامی سلائیڈ جس میں باہمی تعاون کی دعوت اور خوبصورت قول درج ہے: "تخلیقیت خوابوں کو حقیقت میں بدلتی ہے۔"',
+        tag: 'Slide 12: Thank You'
+      }
+    ],
+    downloadUrl: '/assets/projects/portfolio-design/1.png',
+    downloadType: 'image',
+    liveUrl: 'https://gull-portfolio.my.canva.site'
   },
   {
     id: 'workflow-automation',
@@ -885,7 +1081,89 @@ export const PROJECTS: Project[] = [
     techStack: ['n8n', 'Webhooks', 'REST APIs', 'Google Gemini', 'JSON Data', 'Automation'],
     status: 'Production Automation System',
     statusUr: 'پروڈکشن آٹومیشن سسٹم',
-    accentColor: '#00D9F5'
+    accentColor: '#00D9F5',
+    image: '/assets/projects/workflow-automation/ai-form-enrichment.jpg',
+    gallery: [
+      '/assets/projects/workflow-automation/ai-form-enrichment.jpg',
+      '/assets/projects/workflow-automation/scheduled-http-scraper.jpg',
+      '/assets/projects/workflow-automation/chat-web-agent.jpg',
+      '/assets/projects/workflow-automation/multi-trigger-lead-pipeline.jpg',
+      '/assets/projects/workflow-automation/looping-dedup-scraper.png',
+      '/assets/projects/workflow-automation/groq-multi-agent-assistant.jpg'
+    ],
+    galleryTitles: [
+      '1. AI Agent Lead Enrichment & Entity Extraction',
+      '2. Automated Scheduled Web Monitor & Conditional Pipeline',
+      '3. Conversational Research Agent with Real-Time Web Scraping',
+      '4. Multi-Trigger Lead Management, Gmail Dispatch & Slack Alerts',
+      '5. High-Volume Paginated Scraper with Looping & Deduplication',
+      '6. Groq-Powered Multi-Agent Coding Assistant & Knowledge Bot'
+    ],
+    galleryItems: [
+      {
+        image: '/assets/projects/workflow-automation/ai-form-enrichment.jpg',
+        title: '01. AI Agent Lead Enrichment & Entity Extraction',
+        titleUr: '۰۱۔ اے آئی لیڈ اینرچمنٹ و ڈیٹا ایکسٹریکشن پائپ لائن',
+        tagline: 'Automated Form Processing with OpenRouter LLM, Regex Extraction & Google Sheets',
+        taglineUr: 'خودکار فارم پروسیسنگ، ڈیٹا نکالنے اور گوگل شیٹس سنکرونائزیشن',
+        description: 'An automated n8n workflow triggered upon form submission that queries external HTTP endpoints, extracts contact entities (emails, phone numbers, verified URLs) via custom regex, passes enriched context to an OpenRouter-powered AI Agent with memory, and automatically logs structured rows into Google Sheets and exportable CSVs.',
+        descriptionUr: 'ایک جدید n8n ورک فلو جو فارم جمع ہونے پر خودکار متحرک ہوتا ہے۔ یہ بیرونی APIs سے رابطہ کرتا ہے، ای میل، فون اور ویب لنکس نکالتا ہے، OpenRouter اے آئی ایجنٹ کے ذریعے ڈیٹا کا تجزیہ کرتا ہے اور منظم ریکارڈ گوگل شیٹس اور CSV میں محفوظ کرتا ہے۔',
+        tag: 'Form Enrichment & LLM'
+      },
+      {
+        image: '/assets/projects/workflow-automation/scheduled-http-scraper.jpg',
+        title: '02. Automated Scheduled Web Monitor & Conditional Pipeline',
+        titleUr: '۰۲۔ شیڈولڈ ویب مانیٹر و کنڈیشنل پائپ لائن',
+        tagline: 'Cron-Based HTTP Poller with Dynamic Conditional Logic & Field Mapping',
+        taglineUr: 'شیڈول ٹرگر، خودکار ڈیٹا مانیٹرنگ اور فیلڈ میپنگ',
+        description: 'A robust cron-triggered automation that periodically executes HTTP GET requests against target web servers, evaluates content changes via conditional branching ("If" node), and maps custom fields dynamically based on execution status.',
+        descriptionUr: 'مخصوص شیڈول کے مطابق چلنے والا خودکار ورک فلو جو ویب سائٹس سے ڈیٹا حاصل کرتا ہے، "If" کنڈیشن کے ذریعے تبدیلیوں کی جانچ کرتا ہے اور ڈیٹا کو مطلوبہ فارمیٹ میں ایڈٹ کر کے محفوظ کرتا ہے۔',
+        tag: 'Cron & Web Monitor'
+      },
+      {
+        image: '/assets/projects/workflow-automation/chat-web-agent.jpg',
+        title: '03. Conversational Research Agent with Real-Time Web Scraping',
+        titleUr: '۰۳۔ ریئل ٹائم ویب اسکریپنگ والا اے آئی چیٹ بوٹ',
+        tagline: 'Chat-Triggered AI Agent with Memory, Web Extraction & Calculator Tools',
+        taglineUr: 'مستقل میموری، ویب کونٹنٹ ایکسٹریکشن اور میتھ ٹولز کا حامل ایجنٹ',
+        description: 'A multi-step conversational AI system that listens for incoming chat messages, dynamically decides whether to fetch live web pages via HTTP and HTML parsers, and equips an OpenRouter LLM agent with conversation memory and computation tools to answer complex user queries with verified web facts.',
+        descriptionUr: 'چیٹ پر مبنی ذہین اے آئی اسسٹنٹ جو صارف کے سوال کی بنیاد پر لائیو ویب پیجز سے معلومات حاصل کرتا ہے، چیٹ ہسٹری یاد رکھتا ہے اور حساب کتاب کے ٹولز استعمال کر کے جامع جوابات دیتا ہے۔',
+        tag: 'Chatbot & Web Agent'
+      },
+      {
+        image: '/assets/projects/workflow-automation/multi-trigger-lead-pipeline.jpg',
+        title: '04. Multi-Trigger Lead Management, Gmail Dispatch & Slack Alerts',
+        titleUr: '۰۴۔ ملٹی ٹرگر لیڈ مینجمنٹ، ای میل اور سلیک الرٹس',
+        tagline: 'End-to-End CRM Automation with JavaScript Transformation & Team Notifications',
+        taglineUr: 'ویب ہکس، گوگل شیٹس، خودکار جی میل اور سلیک نوٹیفکیشنز',
+        description: 'A high-volume enterprise workflow supporting triple input triggers (manual execution, form submission, and webhooks). It normalizes incoming payload data using native JavaScript, syncs records to Google Sheets, dispatches personalized confirmation emails via Gmail, aggregates new leads, and pushes real-time summaries to Slack channels.',
+        descriptionUr: 'کاروباری اداروں کے لیے مکمل خودکار پائپ لائن جو ویب ہکس اور فارمز سے لیڈز وصول کرتی ہے، جاوا اسکرپٹ سے ڈیٹا صاف کرتی ہے، شیٹس میں محفوظ کر کے گاہک کو ای میل اور ٹیم کو فوری سلیک میسج بھیجتی ہے۔',
+        tag: 'CRM & Slack/Gmail'
+      },
+      {
+        image: '/assets/projects/workflow-automation/looping-dedup-scraper.png',
+        title: '05. High-Volume Paginated Scraper with Looping & Deduplication',
+        titleUr: '۰۵۔ لوپنگ اور ڈپلیکیٹ ریموول کے ساتھ ایڈوانسڈ اسکریپر',
+        tagline: 'Automated Data Scraping with Rate-Limiting Delays & Google Sheets Sync',
+        taglineUr: 'صفحہ در صفحہ ڈیٹا نکالنے اور محفوظ کرنے کا مکمل نظام',
+        description: 'An advanced data mining architecture designed for paginated web platforms. It incorporates rate-limiting wait timers to prevent rate limit blocks, filters noise, eliminates duplicate entries at two stages, and executes structured item loops to ingest thousands of items into Google Sheets without data loss.',
+        descriptionUr: 'ہزاروں ریکارڈز کے لیے ایڈوانسڈ ڈیٹا اسکریپنگ ورک فلو جو خودکار طور پر اگلے صفحات پر جاتا ہے، ڈپلیکیٹ ڈیٹا ہٹاتا ہے، وقفے (Wait) کے ساتھ بلاک ہونے سے بچتا ہے اور صاف ڈیٹا گوگل شیٹس میں بھرتا ہے۔',
+        tag: 'Data Mining & Looping'
+      },
+      {
+        image: '/assets/projects/workflow-automation/groq-multi-agent-assistant.jpg',
+        title: '06. Groq-Powered Multi-Agent Coding Assistant & Knowledge Bot',
+        titleUr: '۰۶۔ گروک ایل ایل ایم ملٹی ایجنٹ کوڈنگ و ریسرچ اسسٹنٹ',
+        tagline: 'Ultra-Fast Groq Inference with Wikipedia, Code Generation & Email Actions',
+        taglineUr: 'تیز ترین گروک اے آئی، ویکیپیڈیا ریسرچ، کوڈ جنریٹر اور ای میل انضمام',
+        description: 'A state-of-the-art dual-agent architecture powered by Groq\'s ultra-low latency inference engine. It pairs a knowledge extraction agent with a coding assistant equipped with Wikipedia research, calculator, and code execution capabilities, complete with automated Gmail notification dispatch upon task completion.',
+        descriptionUr: 'گروک کے سپر فاسٹ اے آئی ماڈل پر تیار کردہ جدید ڈوئل ایجنٹ سسٹم جو لائیو چیٹ میں کوڈنگ میں مدد دیتا ہے، ویکیپیڈیا سے تحقیق کرتا ہے اور مکمل ہونے پر خودکار جی میل الرٹ بھیجتا ہے۔',
+        tag: 'Groq LLM & Multi-Agent'
+      }
+    ],
+    downloadUrl: '/assets/projects/workflow-automation/ai-form-enrichment.jpg',
+    downloadType: 'image',
+    liveUrl: 'https://www.linkedin.com/in/gull-muhammad-91a56240a/recent-activity/all/'
   }
 ];
 
